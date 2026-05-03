@@ -78,7 +78,8 @@ const Navbar = () => {
               <UserButton>
                 <UserButton.MenuItems>
                   <UserButton.Action
-                    labelIcon={<PackageIcon size={16} label="My Orders" />}
+                  label="My Orders"
+                    labelIcon={<PackageIcon size={16}/>}
                     onClick={() => router.push("/orders")}
                   />
                 </UserButton.MenuItems>
@@ -88,24 +89,22 @@ const Navbar = () => {
 
           {/* Mobile User Button  */}
           {user ? (
-            <div>
+            <div className="sm:hidden flex items-center gap-2">
               <UserButton>
                 <UserButton.MenuItems>
                   <UserButton.Action
-                    labelIcon={<PackageIcon size={16} label="My Orders" />}
+                  label="My Orders"
+                    labelIcon={<PackageIcon size={16}/>}
                     onClick={() => router.push("/orders")}
                   />
-                </UserButton.MenuItems>
-              </UserButton>
-              <UserButton>
-                <UserButton.MenuItems>
                   <UserButton.Action
-                    labelIcon={<ShoppingCart size={16} label="Cart" />}
+                  label="Cart"
+                    labelIcon={<ShoppingCart size={16}/>}
                     onClick={() => router.push("/cart")}
                   />
-                </UserButton.MenuItems>
-              </UserButton>
-            </div>
+              </UserButton.MenuItems>
+            </UserButton>
+          </div>
           ) : (
             <div className="sm:hidden">
               <button
