@@ -26,8 +26,8 @@ export async function POST(req) {
   }
 
   // Get body
-  const payload = await req.json()
-  const body = JSON.stringify(payload)
+  const body = await req.text()
+  const payload = JSON.parse(body)
 
   let evt
 
@@ -39,7 +39,7 @@ export async function POST(req) {
       'svix-signature': svix_signature,
     })
   } catch (err) {
-    console.error('Error: Could not verify webhook:', err)
+    console.error('Error: Could not verify webhook:', err.message)
     return new Response('Error: Verification error', {
       status: 400,
     })
@@ -58,18 +58,21 @@ export async function POST(req) {
         name: 'clerk/user.created',
         data: evt.data,
       })
+      console.log('Inngest event sent: clerk/user.created')
       break
     case 'user.updated':
       await inngest.send({
         name: 'clerk/user.updated',
         data: evt.data,
       })
+      console.log('Inngest event sent: clerk/user.updated')
       break
     case 'user.deleted':
       await inngest.send({
         name: 'clerk/user.deleted',
         data: evt.data,
       })
+      console.log('Inngest event sent: clerk/user.deleted')
       break
     default:
       break
